@@ -71,8 +71,9 @@ func TestPushOneItem(t *testing.T) {
 	length := 2
 
 	ll := New(vi)
-	ll.Push(vp)
+	r := ll.Push(vp)
 
+	ll.assertSame(t, r, "Push()")
 	ll.assertLength(t, length)
 	ll.assertHeadIsDefined(t)
 	ll.assertTailIsDefined(t)
@@ -86,8 +87,9 @@ func TestPushOneItemToAnEmptyLinkedList(t *testing.T) {
 	length := 1
 
 	ll := &LinkedList{nil, nil, 0}
-	ll.Push(vp)
+	r := ll.Push(vp)
 
+	ll.assertSame(t, r, "Push()")
 	ll.assertLength(t, length)
 	ll.assertHeadIsDefined(t)
 	ll.assertTailIsDefined(t)
@@ -96,13 +98,84 @@ func TestPushOneItemToAnEmptyLinkedList(t *testing.T) {
 	ll.assertTailNextIsNil(t)
 }
 
+func TestPop(t *testing.T) {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+	ll.Push(13)
+	ll.Push(14)
+
+	n := ll.Pop()
+
+	if n == nil {
+		t.Error("it should return the last value of the Linked List")
+	}
+
+	if n.Value != 14 {
+		t.Error("popped value - want 14, got ", n.Value)
+	}
+
+	if n.Next != nil {
+		t.Error("next item should be nil")
+	}
+
+	if ll.Length != 4 {
+		t.Error("list length - want ", 4, ", got ", ll.Length)
+	}
+
+	if ll.Tail == nil {
+		t.Error("tail should not be nil")
+	}
+
+	if ll.Tail.Value != 13 {
+		t.Error("tail value - want 13, got ", ll.Tail.Value)
+	}
+}
+
+func TestPopAllItems(t *testing.T) {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+	ll.Push(13)
+	ll.Push(14)
+
+	ll.Pop()
+	ll.Pop()
+	ll.Pop()
+	ll.Pop()
+	ll.Pop()
+	n := ll.Pop()
+
+	if n != nil {
+		t.Error("it should return nil")
+	}
+
+	if ll.Length != 0 {
+		t.Error("list should be empty")
+	}
+
+	if ll.Tail != nil {
+		t.Error("tail should be nil")
+	}
+
+	if ll.Head != nil {
+		t.Error("head should be nil")
+	}
+}
+
+func (ll *LinkedList) assertSame(t *testing.T, r *LinkedList, funcName string) {
+	if r != ll {
+		t.Error("func ", funcName, " is returning the wrong pointer")
+	}
+}
+
 func (ll LinkedList) assertHeadIsDefined(t *testing.T) {
 	if ll.Head == nil {
 		t.Error("head wasn't defined")
 	}
 }
 
-func (ll *LinkedList) assertLength(t *testing.T, length int) {
+func (ll LinkedList) assertLength(t *testing.T, length int) {
 	if ll.Length != length {
 		t.Error("want ", length, ", got ", ll.Length)
 	}

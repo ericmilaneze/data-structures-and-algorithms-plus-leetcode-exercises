@@ -43,6 +43,35 @@ func (ll *LinkedList) Push(value int) *LinkedList {
 	return ll
 }
 
+// Pop removes the tail node and returns it
+func (ll *LinkedList) Pop() *Node {
+	if ll.Length == 0 {
+		return nil
+	}
+
+	if ll.Length == 1 {
+		t := ll.Head
+		ll.Head = nil
+		ll.Tail = nil
+		ll.Length = 0
+		return t
+	}
+
+	prev := ll.Head
+	curr := ll.Head.Next
+	for curr.Next != nil {
+		prev = curr
+		curr = curr.Next
+	}
+
+	ll.Tail = prev
+	ll.Tail.Next = nil
+	curr.Next = nil
+	ll.Length--
+
+	return curr
+}
+
 // Print shows the details of the Linked List on the screen
 func (ll LinkedList) Print() {
 	currentNode := ll.Head

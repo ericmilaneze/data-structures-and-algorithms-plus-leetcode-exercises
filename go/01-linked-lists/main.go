@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ericmilaneze/data-structures-and-algorithms-plus-leetcode-exercises/go/01-linked-lists/linkedlist"
+	"linked-lists/linkedlist"
 )
 
 func main() {
