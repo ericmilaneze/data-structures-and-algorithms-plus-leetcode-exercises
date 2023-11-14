@@ -41,7 +41,7 @@ func TestNew(t *testing.T) {
 	ll := New(v)
 
 	if ll.Length != length {
-		t.Fatal("length\r\nwant", length, "\r\ngot ", ll.Length)
+		t.Fatal("length\r\nwant:", length, "\r\ngot:", ll.Length)
 	}
 
 	if ll.Head == nil {
@@ -49,7 +49,7 @@ func TestNew(t *testing.T) {
 	}
 
 	if ll.Head.Value != v {
-		t.Error("head value\r\nwant", v, "\r\ngot", ll.Head.Value)
+		t.Error("head value\r\nwant:", v, "\r\ngot:", ll.Head.Value)
 	}
 
 	if ll.Tail == nil {
@@ -57,7 +57,7 @@ func TestNew(t *testing.T) {
 	}
 
 	if ll.Tail.Value != v {
-		t.Error("tail value\r\nwant", v, "\r\ngot ", ll.Tail.Value)
+		t.Error("tail value\r\nwant:", v, "\r\ngot:", ll.Tail.Value)
 	}
 
 	if ll.Tail.Next != nil {
@@ -95,7 +95,7 @@ func TestLinkedList_Push_one_item(t *testing.T) {
 	}
 
 	if ll.Length != length {
-		t.Error("length\r\nwant", length, "\r\ngot ", ll.Length)
+		t.Error("length\r\nwant:", length, "\r\ngot:", ll.Length)
 	}
 
 	if ll.Head == nil {
@@ -103,7 +103,7 @@ func TestLinkedList_Push_one_item(t *testing.T) {
 	}
 
 	if ll.Head.Value != vi {
-		t.Error("head value\r\nwant", vi, "\r\ngot", ll.Head.Value)
+		t.Error("head value\r\nwant:", vi, "\r\ngot:", ll.Head.Value)
 	}
 
 	if ll.Tail == nil {
@@ -111,7 +111,7 @@ func TestLinkedList_Push_one_item(t *testing.T) {
 	}
 
 	if ll.Tail.Value != vp {
-		t.Error("tail value\r\nwant", vp, "\r\ngot ", ll.Tail.Value)
+		t.Error("tail value\r\nwant:", vp, "\r\ngot:", ll.Tail.Value)
 	}
 
 	if ll.Tail.Next != nil {
@@ -131,7 +131,7 @@ func TestLinkedList_Push_one_item_to_an_empty_linked_list(t *testing.T) {
 	}
 
 	if ll.Length != length {
-		t.Error("length\r\nwant", length, "\r\ngot ", ll.Length)
+		t.Error("length\r\nwant:", length, "\r\ngot:", ll.Length)
 	}
 
 	if ll.Head == nil {
@@ -139,7 +139,7 @@ func TestLinkedList_Push_one_item_to_an_empty_linked_list(t *testing.T) {
 	}
 
 	if ll.Head.Value != vp {
-		t.Error("head value\r\nwant", vp, "\r\ngot", ll.Head.Value)
+		t.Error("head value\r\nwant:", vp, "\r\ngot:", ll.Head.Value)
 	}
 
 	if ll.Tail == nil {
@@ -147,7 +147,7 @@ func TestLinkedList_Push_one_item_to_an_empty_linked_list(t *testing.T) {
 	}
 
 	if ll.Tail.Value != vp {
-		t.Error("tail value\r\nwant", vp, "\r\ngot ", ll.Tail.Value)
+		t.Error("tail value\r\nwant:", vp, "\r\ngot:", ll.Tail.Value)
 	}
 
 	if ll.Tail.Next != nil {
@@ -169,7 +169,7 @@ func TestLinkedList_Pop(t *testing.T) {
 	}
 
 	if n.Value != 14 {
-		t.Error("popped value\r\nwant 14\r\ngot ", n.Value)
+		t.Error("popped value\r\nwant: 14\r\ngot:", n.Value)
 	}
 
 	if n.Next != nil {
@@ -177,7 +177,7 @@ func TestLinkedList_Pop(t *testing.T) {
 	}
 
 	if ll.Length != 4 {
-		t.Error("list length\r\nwant ", 4, "\r\ngot ", ll.Length)
+		t.Error("list length\r\nwant:", 4, "\r\ngot:", ll.Length)
 	}
 
 	if ll.Tail == nil {
@@ -185,7 +185,7 @@ func TestLinkedList_Pop(t *testing.T) {
 	}
 
 	if ll.Tail.Value != 13 {
-		t.Error("tail value\r\nwant 13\r\ngot", ll.Tail.Value)
+		t.Error("tail value\r\nwant: 13\r\ngot:", ll.Tail.Value)
 	}
 }
 
@@ -220,20 +220,6 @@ func TestLinkedList_Pop_all_items(t *testing.T) {
 	}
 }
 
-func ExampleLinkedList_Unshift_empty_linked_list() {
-	ll := &LinkedList{}
-
-	ll.Unshift(9)
-
-	ll.Print()
-
-	// Output:
-	// 9->nil
-	// Head: 9
-	// Tail: 9
-	// Length: 1
-}
-
 func TestLinkedList_Unshift_empty_linked_list(t *testing.T) {
 	ll := &LinkedList{}
 
@@ -248,11 +234,11 @@ func TestLinkedList_Unshift_empty_linked_list(t *testing.T) {
 	}
 
 	if ll.Head.Value != 9 {
-		t.Error("head value\r\nwant", 9, "\r\ngot", ll.Head.Value)
+		t.Error("head value\r\nwant:", 9, "\r\ngot:", ll.Head.Value)
 	}
 
 	if ll.Length != 1 {
-		t.Error("length\r\nwant", 1, "\r\ngot ", ll.Length)
+		t.Error("length\r\nwant:", 1, "\r\ngot:", ll.Length)
 	}
 
 	if ll.Tail == nil {
@@ -260,22 +246,8 @@ func TestLinkedList_Unshift_empty_linked_list(t *testing.T) {
 	}
 
 	if ll.Tail.Value != 9 {
-		t.Error("tail value\r\nwant", 9, "\r\ngot ", ll.Tail.Value)
+		t.Error("tail value\r\nwant:", 9, "\r\ngot:", ll.Tail.Value)
 	}
-}
-
-func ExampleLinkedList_Unshift_one_item() {
-	ll := New(10)
-
-	ll.Unshift(9)
-
-	ll.Print()
-
-	// Output:
-	// 9->10->nil
-	// Head: 9
-	// Tail: 10
-	// Length: 2
 }
 
 func TestLinkedList_Unshift_one_item(t *testing.T) {
@@ -292,11 +264,11 @@ func TestLinkedList_Unshift_one_item(t *testing.T) {
 	}
 
 	if ll.Head.Value != 9 {
-		t.Error("head value\r\nwant", 9, "\r\ngot", ll.Head.Value)
+		t.Error("head value\r\nwant:", 9, "\r\ngot:", ll.Head.Value)
 	}
 
 	if ll.Length != 2 {
-		t.Error("length\r\nwant", 2, "\r\ngot ", ll.Length)
+		t.Error("length\r\nwant:", 2, "\r\ngot:", ll.Length)
 	}
 
 	if ll.Tail == nil {
@@ -304,11 +276,11 @@ func TestLinkedList_Unshift_one_item(t *testing.T) {
 	}
 
 	if ll.Tail.Value != 10 {
-		t.Error("tail value\r\nwant", 10, "\r\ngot ", ll.Tail.Value)
+		t.Error("tail value\r\nwant:", 10, "\r\ngot:", ll.Tail.Value)
 	}
 }
 
-func ExampleLinkedList_Unshift_multiple_items() {
+func ExampleLinkedList_Unshift() {
 	ll := New(10)
 	ll.Push(11)
 	ll.Push(12)
@@ -346,11 +318,11 @@ func TestLinkedList_Unshift_multiple_items(t *testing.T) {
 	}
 
 	if ll.Head.Value != 9 {
-		t.Error("head value\r\nwant", 9, "\r\ngot", ll.Head.Value)
+		t.Error("head value\r\nwant:", 9, "\r\ngot:", ll.Head.Value)
 	}
 
 	if ll.Length != 7 {
-		t.Error("length\r\nwant", 7, "\r\ngot ", ll.Length)
+		t.Error("length\r\nwant:", 7, "\r\ngot:", ll.Length)
 	}
 
 	if ll.Tail == nil {
@@ -358,6 +330,175 @@ func TestLinkedList_Unshift_multiple_items(t *testing.T) {
 	}
 
 	if ll.Tail.Value != 15 {
-		t.Error("tail value\r\nwant", 15, "\r\ngot ", ll.Tail.Value)
+		t.Error("tail value\r\nwant:", 15, "\r\ngot:", ll.Tail.Value)
+	}
+}
+
+func TestLinkedList_Shift_empty_linked_list(t *testing.T) {
+	ll := &LinkedList{}
+
+	r := ll.Shift()
+
+	if r != nil {
+		t.Error("it should return nil")
+	}
+
+	if ll.Length != 0 {
+		t.Error("length\r\nwant:", 0, "\r\ngot:", ll.Length)
+	}
+
+	if ll.Head != nil {
+		t.Error("head shouldn't be defined")
+	}
+
+	if ll.Tail != nil {
+		t.Error("tail shouldn't be defined")
+	}
+}
+
+func TestLinkedList_Shift_one_item(t *testing.T) {
+	ll := New(10)
+
+	r := ll.Shift()
+
+	if r == nil {
+		t.Fatal("it shouldn't return nil")
+	}
+
+	if r.Value != 10 {
+		t.Error("value\r\nwant:", 10, "\r\ngot:", r.Value)
+	}
+
+	if ll.Length != 0 {
+		t.Error("length\r\nwant:", 0, "\r\ngot:", ll.Length)
+	}
+
+	if ll.Head != nil {
+		t.Error("head shouldn't be defined")
+	}
+
+	if ll.Tail != nil {
+		t.Error("tail shouldn't be defined")
+	}
+}
+
+func ExampleLinkedList_Shift() {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+	ll.Push(13)
+	ll.Push(14)
+	ll.Push(15)
+
+	r := ll.Shift()
+
+	fmt.Println(r.Value)
+	ll.Print()
+
+	// Output:
+	// 10
+	// 11->12->13->14->15->nil
+	// Head: 11
+	// Tail: 15
+	// Length: 5
+}
+
+func TestLinkedList_Shift_multiple_items(t *testing.T) {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+	ll.Push(13)
+	ll.Push(14)
+	ll.Push(15)
+
+	r := ll.Shift()
+
+	if r == nil {
+		t.Fatal("it shouldn't return nil")
+	}
+
+	if r.Value != 10 {
+		t.Error("value\r\nwant:", 10, "\r\ngot:", r.Value)
+	}
+
+	if ll.Length != 5 {
+		t.Error("length\r\nwant:", 5, "\r\ngot:", ll.Length)
+	}
+
+	if ll.Head == nil {
+		t.Fatal("head should be defined")
+	}
+
+	if ll.Head.Value != 11 {
+		t.Error("head value\r\nwant: 11\r\ngot:", ll.Head.Value)
+	}
+
+	if ll.Tail == nil {
+		t.Fatal("tail should be defined")
+	}
+
+	if ll.Tail.Value != 15 {
+		t.Error("tail value\r\nwant: 15\r\ngot:", ll.Head.Value)
+	}
+}
+
+func TestLinkedList_Get(t *testing.T) {
+	tests := []struct {
+		pos   int
+		value int
+	}{
+		{0, 10},
+		{1, 11},
+		{2, 12},
+	}
+
+	ll := &LinkedList{}
+
+	for _, v := range tests {
+		ll.Push(v.value)
+	}
+
+	for _, v := range tests {
+		r := ll.Get(v.pos)
+
+		if r == nil {
+			t.Fatal("wasn't expecting nil")
+		}
+
+		if r.Value != v.value {
+			t.Error("wrong value\r\npos:", v.pos, "\r\nwant:", v.value, "\r\ngot:", r.Value)
+		}
+	}
+}
+
+func TestLinkedList_Get_empty(t *testing.T) {
+	ll := &LinkedList{}
+
+	r := ll.Get(0)
+
+	if r != nil {
+		t.Error("should return nil")
+	}
+}
+
+func TestLinkedList_Get_index_less_than_zero(t *testing.T) {
+	ll := &LinkedList{}
+
+	r := ll.Get(-1)
+
+	if r != nil {
+		t.Error("should return nil")
+	}
+}
+
+func TestLinkedList_Get_index_greater_than_length(t *testing.T) {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+
+	r := ll.Get(3)
+
+	if r != nil {
+		t.Error("should return nil")
 	}
 }

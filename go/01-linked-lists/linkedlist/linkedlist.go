@@ -86,20 +86,61 @@ func (ll *LinkedList) Unshift(value int) *LinkedList {
 	return ll
 }
 
-// Print shows the details of the Linked List on the screen
-func (ll LinkedList) Print() {
-	currentNode := ll.Head
-
-	for currentNode != nil {
-		fmt.Print(currentNode.Value, "->")
-		currentNode = currentNode.Next
+// Shift removes an items from the beginning of the Linked List
+func (ll *LinkedList) Shift() *Node {
+	if ll.Length == 0 {
+		return nil
 	}
 
-	fmt.Print("nil")
+	oldHead := ll.Head
+	ll.Head = oldHead.Next
+	oldHead.Next = nil
+	ll.Length--
 
-	fmt.Println()
+	if ll.Length == 0 {
+		ll.Tail = nil
+	}
 
-	fmt.Println("Head:", ll.Head.Value)
-	fmt.Println("Tail:", ll.Tail.Value)
+	return oldHead
+}
+
+func (ll LinkedList) Get(pos int) *Node {
+	if pos < 0 || pos > ll.Length {
+		return nil
+	}
+
+	if pos == 0 {
+		return ll.Head
+	}
+
+	if pos == ll.Length-1 {
+		return ll.Tail
+	}
+
+	curr := ll.Head.Next
+	for i := 1; i < pos; i++ {
+		curr = curr.Next
+	}
+
+	return curr
+}
+
+// Print shows the details of the Linked List on the screen
+func (ll LinkedList) Print() {
+	if ll.Length > 0 {
+		currentNode := ll.Head
+
+		for currentNode != nil {
+			fmt.Print(currentNode.Value, "->")
+			currentNode = currentNode.Next
+		}
+
+		fmt.Print("nil")
+
+		fmt.Println()
+		fmt.Println("Head:", ll.Head.Value)
+		fmt.Println("Tail:", ll.Tail.Value)
+	}
+
 	fmt.Println("Length:", ll.Length)
 }
