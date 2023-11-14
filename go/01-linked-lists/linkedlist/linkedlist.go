@@ -72,6 +72,20 @@ func (ll *LinkedList) Pop() *Node {
 	return curr
 }
 
+// Unshift adds a new item to the beginning of the Linked List
+func (ll *LinkedList) Unshift(value int) *LinkedList {
+	temp := ll.Head
+	ll.Head = &Node{value, temp}
+
+	if ll.Length == 0 {
+		ll.Tail = ll.Head
+	}
+
+	ll.Length++
+
+	return ll
+}
+
 // Print shows the details of the Linked List on the screen
 func (ll LinkedList) Print() {
 	currentNode := ll.Head
