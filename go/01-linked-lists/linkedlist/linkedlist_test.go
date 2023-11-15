@@ -502,3 +502,67 @@ func TestLinkedList_Get_index_greater_than_length(t *testing.T) {
 		t.Error("should return nil")
 	}
 }
+
+func TestLinkedList_Set(t *testing.T) {
+	tests := []struct {
+		pos      int
+		oldValue int
+		newValue int
+	}{
+		{0, 10, 110},
+		{1, 11, 111},
+		{2, 12, 112},
+	}
+
+	ll := &LinkedList{}
+
+	for _, v := range tests {
+		ll.Push(v.oldValue)
+	}
+
+	for _, v := range tests {
+		r := ll.Set(v.pos, v.newValue)
+
+		if r == false {
+			t.Error("wasn't expecting false")
+		}
+
+		nr := ll.Get(v.pos)
+
+		if nr.Value != v.newValue {
+			t.Error("wrong value\r\npos:", v.pos, "\r\nwant:", v.newValue, "\r\ngot:", nr.Value)
+		}
+	}
+}
+
+func TestLinkedList_Set_empty(t *testing.T) {
+	ll := &LinkedList{}
+
+	r := ll.Set(0, 10)
+
+	if r != false {
+		t.Error("should return false")
+	}
+}
+
+func TestLinkedList_Set_index_less_than_zero(t *testing.T) {
+	ll := &LinkedList{}
+
+	r := ll.Set(-1, 10)
+
+	if r != false {
+		t.Error("should return false")
+	}
+}
+
+func TestLinkedList_Set_index_greater_than_length(t *testing.T) {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+
+	r := ll.Set(3, 10)
+
+	if r != false {
+		t.Error("should return false")
+	}
+}

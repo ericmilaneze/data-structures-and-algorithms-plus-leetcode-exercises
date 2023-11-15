@@ -10,22 +10,24 @@ type Node struct {
 }
 
 // LinkedList has two pointers:
-// Head >> points to the first Node.
-// Tail >> points to the last Node.
+//
+// Head points to the first Node.
+//
+// Tail points to the last Node.
 type LinkedList struct {
 	Head   *Node
 	Tail   *Node
 	Length int
 }
 
-// New creates a new LinkedList and sets its first node value
+// New creates a new LinkedList and sets its first node value.
 func New(value int) *LinkedList {
 	n := &Node{value, nil}
 	ll := &LinkedList{n, n, 1}
 	return ll
 }
 
-// Push adds a new node to the end of the Linked List
+// Push adds a new node to the end of the Linked List.
 func (ll *LinkedList) Push(value int) *LinkedList {
 	n := &Node{value, nil}
 
@@ -43,7 +45,7 @@ func (ll *LinkedList) Push(value int) *LinkedList {
 	return ll
 }
 
-// Pop removes the tail node and returns it
+// Pop removes the tail node and returns it.
 func (ll *LinkedList) Pop() *Node {
 	if ll.Length == 0 {
 		return nil
@@ -72,7 +74,7 @@ func (ll *LinkedList) Pop() *Node {
 	return curr
 }
 
-// Unshift adds a new item to the beginning of the Linked List
+// Unshift adds a new item to the beginning of the Linked List.
 func (ll *LinkedList) Unshift(value int) *LinkedList {
 	temp := ll.Head
 	ll.Head = &Node{value, temp}
@@ -86,7 +88,7 @@ func (ll *LinkedList) Unshift(value int) *LinkedList {
 	return ll
 }
 
-// Shift removes an items from the beginning of the Linked List
+// Shift removes an items from the beginning of the Linked List.
 func (ll *LinkedList) Shift() *Node {
 	if ll.Length == 0 {
 		return nil
@@ -104,28 +106,42 @@ func (ll *LinkedList) Shift() *Node {
 	return oldHead
 }
 
-func (ll LinkedList) Get(pos int) *Node {
-	if pos < 0 || pos > ll.Length {
+// Get returns the Node that is on the index position of the list.
+func (ll LinkedList) Get(index int) *Node {
+	if index < 0 || index > ll.Length {
 		return nil
 	}
 
-	if pos == 0 {
+	if index == 0 {
 		return ll.Head
 	}
 
-	if pos == ll.Length-1 {
+	if index == ll.Length-1 {
 		return ll.Tail
 	}
 
 	curr := ll.Head.Next
-	for i := 1; i < pos; i++ {
+	for i := 1; i < index; i++ {
 		curr = curr.Next
 	}
 
 	return curr
 }
 
-// Print shows the details of the Linked List on the screen
+// Set changes the value of a Node on the list and returns true if successful.
+func (ll *LinkedList) Set(index int, value int) bool {
+	node := ll.Get(index)
+
+	if node == nil {
+		return false
+	}
+
+	node.Value = value
+
+	return true
+}
+
+// Print shows the details of the Linked List on the screen.
 func (ll LinkedList) Print() {
 	if ll.Length > 0 {
 		currentNode := ll.Head
