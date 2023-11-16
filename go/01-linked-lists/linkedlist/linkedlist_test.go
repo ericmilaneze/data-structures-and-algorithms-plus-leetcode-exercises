@@ -12,9 +12,11 @@ func Example() {
 	ll.Push(13)
 	ll.Push(14)
 
+	fmt.Println(ll)
 	ll.Print()
 
 	// Output:
+	// Head: Value: 10 -> Next: Value: 11 -> Next: Value: 12 -> Next: Value: 13 -> Next: Value: 14 -> Next: <nil> / Tail: Value: 14 -> Next: <nil> / Length: 5
 	// 10->11->12->13->14->nil
 	// Head: 10
 	// Tail: 14
@@ -722,5 +724,67 @@ func TestLinkedList_Remove_index_greater_than_length(t *testing.T) {
 
 	if r != nil {
 		t.Error("should return nil")
+	}
+}
+
+func ExampleLinkedList_Reverse() {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+	ll.Push(13)
+	ll.Push(14)
+	ll.Push(15)
+
+	ll.Reverse()
+
+	ll.Print()
+
+	// Output:
+	// 15->14->13->12->11->10->nil
+	// Head: 15
+	// Tail: 10
+	// Length: 6
+}
+
+func ExampleLinkedList_Reverse_two_items() {
+	ll := New(10)
+	ll.Push(11)
+
+	ll.Reverse()
+
+	ll.Print()
+
+	// Output:
+	// 11->10->nil
+	// Head: 11
+	// Tail: 10
+	// Length: 2
+}
+
+func TestLinkedList_Reverse_empty_list(t *testing.T) {
+	ll := LinkedList{}
+
+	ll.Reverse()
+
+	if ll.Length != 0 {
+		t.Error("length\r\nwant: 0\r\ngot:", ll.Length)
+	}
+}
+
+func TestLinkedList_Reverse_one_item(t *testing.T) {
+	ll := New(10)
+
+	ll.Reverse()
+
+	if ll.Length != 1 {
+		t.Error("length\r\nwant: 1\r\ngot:", ll.Length)
+	}
+
+	if ll.Head.Value != 10 {
+		t.Error("head value\r\nwant: 10\r\ngot:", ll.Head.Value)
+	}
+
+	if ll.Tail.Value != 10 {
+		t.Error("tail value\r\nwant: 10\r\ngot:", ll.Tail.Value)
 	}
 }

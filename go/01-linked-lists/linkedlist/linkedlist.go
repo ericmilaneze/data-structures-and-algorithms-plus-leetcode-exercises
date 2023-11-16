@@ -9,6 +9,10 @@ type Node struct {
 	Next  *Node
 }
 
+func (node Node) String() string {
+	return fmt.Sprintf("Value: %v -> Next: %v", node.Value, node.Next)
+}
+
 // LinkedList has two pointers:
 //
 // Head points to the first Node.
@@ -18,6 +22,10 @@ type LinkedList struct {
 	Head   *Node
 	Tail   *Node
 	Length int
+}
+
+func (ll LinkedList) String() string {
+	return fmt.Sprintf("Head: %v / Tail: %v / Length: %v", ll.Head, ll.Tail, ll.Length)
 }
 
 // New creates a new LinkedList and sets its first node value.
@@ -185,6 +193,37 @@ func (ll *LinkedList) Remove(index int) *Node {
 	ll.Length--
 
 	return temp
+}
+
+func (ll *LinkedList) Reverse() {
+	if ll.Length <= 1 {
+		return
+	}
+
+	if ll.Length == 2 {
+		ll.Head, ll.Tail = ll.Tail, ll.Head
+		ll.Tail.Next = nil
+		ll.Head.Next = ll.Tail
+
+		return
+	}
+
+	second := ll.Head.Next
+	ll.Head, ll.Tail = ll.Tail, ll.Head
+	ll.Tail.Next = nil
+
+	a, b, c := second, second.Next, second.Next.Next
+	for {
+		b.Next = a
+
+		if c == nil {
+			break
+		}
+
+		a, b, c = b, c, c.Next
+	}
+
+	second.Next = ll.Tail
 }
 
 // Print shows the details of the Linked List on the screen.
