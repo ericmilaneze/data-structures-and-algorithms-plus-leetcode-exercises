@@ -141,6 +141,52 @@ func (ll *LinkedList) Set(index int, value int) bool {
 	return true
 }
 
+// Insert adds an item to the specified index and move the other nodes one step to the right
+func (ll *LinkedList) Insert(index int, value int) bool {
+	if index < 0 || index > ll.Length {
+		return false
+	}
+
+	if index == 0 {
+		ll.Unshift(value)
+		return true
+	}
+
+	if ll.Length == index {
+		ll.Push(value)
+		return true
+	}
+
+	prevNode := ll.Get(index - 1)
+	prevNode.Next = &Node{value, prevNode.Next}
+	ll.Length++
+
+	return true
+}
+
+// Removes an item from the specified index
+func (ll *LinkedList) Remove(index int) *Node {
+	if index < 0 || index > ll.Length {
+		return nil
+	}
+
+	if index == 0 {
+		return ll.Shift()
+	}
+
+	if index == ll.Length-1 {
+		return ll.Pop()
+	}
+
+	prevNode := ll.Get(index - 1)
+	temp := prevNode.Next
+	prevNode.Next = temp.Next
+	temp.Next = nil
+	ll.Length--
+
+	return temp
+}
+
 // Print shows the details of the Linked List on the screen.
 func (ll LinkedList) Print() {
 	if ll.Length > 0 {

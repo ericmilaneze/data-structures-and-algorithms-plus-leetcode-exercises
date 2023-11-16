@@ -566,3 +566,161 @@ func TestLinkedList_Set_index_greater_than_length(t *testing.T) {
 		t.Error("should return false")
 	}
 }
+
+func ExampleLinkedList_Insert() {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(13)
+	ll.Push(14)
+	ll.Push(15)
+
+	r := ll.Insert(2, 12)
+
+	fmt.Println(r)
+	ll.Print()
+
+	// Output:
+	// true
+	// 10->11->12->13->14->15->nil
+	// Head: 10
+	// Tail: 15
+	// Length: 6
+}
+
+func TestLinkedList_Insert(t *testing.T) {
+	tests := []struct {
+		pos      int
+		oldValue int
+		newValue int
+	}{
+		{0, 10, 110},
+		{1, 11, 111},
+		{2, 12, 112},
+	}
+
+	ll := &LinkedList{}
+
+	for _, v := range tests {
+		r := ll.Insert(v.pos, v.newValue)
+
+		if r == false {
+			t.Error("wasn't expecting false")
+		}
+
+		nr := ll.Get(v.pos)
+
+		if nr.Value != v.newValue {
+			t.Error("wrong value\r\npos:", v.pos, "\r\nwant:", v.newValue, "\r\ngot:", nr.Value)
+		}
+	}
+}
+
+func TestLinkedList_Insert_index_less_than_zero(t *testing.T) {
+	ll := &LinkedList{}
+
+	r := ll.Insert(-1, 10)
+
+	if r != false {
+		t.Error("should return false")
+	}
+}
+
+func TestLinkedList_Insert_index_greater_than_length(t *testing.T) {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+
+	r := ll.Insert(4, 10)
+
+	if r != false {
+		t.Error("should return false")
+	}
+}
+
+func ExampleLinkedList_Remove() {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(121) // will be removed
+	ll.Push(12)
+	ll.Push(13)
+	ll.Push(14)
+	ll.Push(15)
+
+	r := ll.Remove(2)
+
+	fmt.Println(r.Value)
+	ll.Print()
+
+	// Output:
+	// 121
+	// 10->11->12->13->14->15->nil
+	// Head: 10
+	// Tail: 15
+	// Length: 6
+}
+
+func TestLinkedList_Remove_from_start_to_end(t *testing.T) {
+	tests := []int{10, 11, 12, 13, 14, 15}
+
+	ll := &LinkedList{}
+
+	for _, v := range tests {
+		ll.Push(v)
+	}
+
+	for _, v := range tests {
+		r := ll.Remove(0)
+
+		if r == nil {
+			t.Error("wasn't expecting nil")
+		}
+
+		if r.Value != v {
+			t.Error("wrong value\r\nwant:", v, "\r\ngot:", r.Value)
+		}
+	}
+}
+
+func TestLinkedList_Remove_from_end_to_start(t *testing.T) {
+	tests := []int{10, 11, 12, 13, 14, 15}
+
+	ll := &LinkedList{}
+
+	for _, v := range tests {
+		ll.Push(v)
+	}
+
+	for i := len(tests) - 1; i >= 0; i-- {
+		r := ll.Remove(ll.Length - 1)
+
+		if r == nil {
+			t.Error("wasn't expecting nil")
+		}
+
+		if r.Value != tests[i] {
+			t.Error("wrong value\r\nwant:", tests[i], "\r\ngot:", r.Value)
+		}
+	}
+}
+
+func TestLinkedList_Remove_index_less_than_zero(t *testing.T) {
+	ll := &LinkedList{}
+
+	r := ll.Remove(-1)
+
+	if r != nil {
+		t.Error("should return nil")
+	}
+}
+
+func TestLinkedList_Remove_index_greater_than_length(t *testing.T) {
+	ll := New(10)
+	ll.Push(11)
+	ll.Push(12)
+
+	r := ll.Remove(4)
+
+	if r != nil {
+		t.Error("should return nil")
+	}
+}
