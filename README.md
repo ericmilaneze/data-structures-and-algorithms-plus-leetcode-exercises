@@ -7,4 +7,4 @@ The course uses the JavaScript language as a basis. I'll be adding more language
 ## Languages
 
 - [JavaScript](./javascript/)
-- [Go](./go/)
+- [Go](https://github.com/ericmilaneze/data-structure-and-algorithms-in-go)
